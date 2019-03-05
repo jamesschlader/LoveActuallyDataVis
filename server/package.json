@@ -1,0 +1,19 @@
+{
+  "name": "server.js",
+  "version": "1.0.0",
+  "description": "Displays data from the movie Love Actually using D3 data visualization technology.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "James Schlader",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-graphql": "^0.7.1",
+    "graphql": "^14.1.1",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.4.17",
+    "morgan": "^1.9.1"
+  }
+}
