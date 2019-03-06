@@ -4,6 +4,10 @@ const Schema = require("./Schema/Schema");
 const app = express();
 const logger = require("morgan");
 const mongoose = require("mongoose");
+const cors = require("cors");
+
+//allow cross-origin requests
+app.use(cors());
 
 const PORT = process.env.PORT || 4000;
 
