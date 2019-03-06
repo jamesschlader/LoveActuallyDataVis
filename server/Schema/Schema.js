@@ -1,11 +1,12 @@
 const graphql = require("graphql");
-const _ = require("lodash");
+
 const {
   GraphQLObjectType,
   GraphQLID,
   GraphQLString,
   GraphQLSchema,
-  GraphQLList
+  GraphQLList,
+  GraphQLNonNull
 } = graphql;
 const { Actor } = require("../models/Actor");
 const { Scene } = require("../models/Scene");
@@ -17,7 +18,7 @@ const ActorType = new GraphQLObjectType({
       type: GraphQLID
     },
     name: {
-      type: GraphQLString
+      type: new GraphQLNonNull(GraphQLString)
     },
     role: {
       type: GraphQLString
@@ -38,7 +39,7 @@ const SceneType = new GraphQLObjectType({
       type: GraphQLID
     },
     scene: {
-      type: GraphQLString
+      type: new GraphQLNonNull(GraphQLString)
     },
     actors: {
       type: new GraphQLList(ActorType),
