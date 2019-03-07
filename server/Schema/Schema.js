@@ -23,10 +23,13 @@ const ActorType = new GraphQLObjectType({
     role: {
       type: GraphQLString
     },
+    sceneIds: {
+      type: new GraphQLList(GraphQLID)
+    },
     scenes: {
       type: new GraphQLList(SceneType),
-      async resolve(parent, args) {
-        return await parent.scenes.map(id => Scene.findById({ _id: id }));
+      resolve(parent, args) {
+        return parent.sceneIds.map(id => Scene.findById({ _id: id }));
       }
     }
   })
@@ -41,10 +44,13 @@ const SceneType = new GraphQLObjectType({
     scene: {
       type: new GraphQLNonNull(GraphQLString)
     },
+    actorIds: {
+      type: new GraphQLList(GraphQLID)
+    },
     actors: {
       type: new GraphQLList(ActorType),
       resolve(parent, args) {
-        return parent.actors.map(actor => Actor.findById({ _id: actor.id }));
+        return parent.actorIds.map(id => Actor.findById({ _id: id }));
       }
     }
   })
@@ -108,7 +114,7 @@ const Mutation = new GraphQLObjectType({
       args: {
         name: { type: GraphQLString },
         role: { type: GraphQLString },
-        scenes: { type: new GraphQLList(GraphQLID) }
+        sceneIds: { type: new GraphQLList(GraphQLID) }
       },
       resolve(parent, args) {
         let actor = new Actor({
@@ -124,12 +130,16 @@ const Mutation = new GraphQLObjectType({
         id: { type: GraphQLID },
         name: { type: GraphQLString },
         role: { type: GraphQLString },
-        scenes: { type: new GraphQLList(GraphQLID) }
+        sceneIds: { type: new GraphQLList(GraphQLID) }
       },
       resolve(parent, args) {
-        return Actor.findOneAndUpdate(args.id, {
-          ...args
-        });
+        return Actor.findOneAndUpdate(
+          args.id,
+          {
+            ...args
+          },
+          { upsert: true }
+        );
       }
     },
 
@@ -151,8 +161,9 @@ const Mutation = new GraphQLObjectType({
       type: SceneType,
       args: {
         scene: { type: GraphQLString },
-        actors: { type: new GraphQLList(GraphQLID) }
+        actorIds: { type: new GraphQLList(GraphQLID) }
       },
+
       resolve(parent, args) {
         let scene = new Scene({
           ...args
@@ -166,7 +177,7 @@ const Mutation = new GraphQLObjectType({
       args: {
         id: { type: GraphQLID },
         scene: { type: GraphQLString },
-        actors: { type: new GraphQLList(GraphQLID) }
+        actorIds: { type: new GraphQLList(GraphQLID) }
       },
       resolve(parent, args) {
         return Scene.findOneAndUpdate(args.id, {

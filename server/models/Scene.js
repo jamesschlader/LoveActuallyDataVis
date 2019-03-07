@@ -7,7 +7,7 @@ const SceneSchema = new Schema({
     type: String,
     required: true
   },
-  actors: {
+  actorIds: {
     type: Array
   }
 });

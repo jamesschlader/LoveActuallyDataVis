@@ -10,9 +10,8 @@ const ActorSchema = new Schema({
   role: {
     type: String
   },
-  scenes: {
-    type: Array,
-    required: true
+  sceneIds: {
+    type: String
   }
 });
 
