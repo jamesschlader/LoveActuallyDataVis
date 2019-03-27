@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const { ActorSchema } = require("./Actor");
 
 const SceneSchema = new Schema({
   scene: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   actorIds: {
     type: Array

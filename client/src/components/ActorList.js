@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { graphql, compose } from "react-apollo";
 import { getActorsQuery } from "../queries/queries";
-import AddActor from "./AddActor";
+
 import ActorDetails from "./ActorDetails";
 
 class ActorList extends Component {
@@ -34,7 +34,6 @@ class ActorList extends Component {
         <h3 className="uk-card-title">Actors</h3>
         <ul className="uk-list uk-link-text">{this.displayActors()}</ul>
         <ActorDetails selectedActor={this.state.selectedActorId} />
-        <AddActor />
       </div>
     );
   }

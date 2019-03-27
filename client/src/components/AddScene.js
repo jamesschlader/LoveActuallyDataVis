@@ -38,6 +38,10 @@ class AddScene extends Component {
       },
       refetchQueries: [{ query: getScenesQuery }]
     });
+    this.setState({
+      scene: "",
+      actorIds: []
+    });
   };
 
   showSelectedActors = () => {

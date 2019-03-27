@@ -11,11 +11,16 @@ class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        <h1 className=" uk-margin-large-top uk-text-center">Love Actually</h1>
-        <div className="uk-container uk-align-center">
-          <div className="uk-container uk-box-shadow-large uk-box-shadow-right-large uk-box-shadow-left-large uk-margin-large uk-grid uk-child-width-1-2@s ">
-            <SceneList />
+        <h1
+          className=" uk-margin-large-top uk-text-center"
+          style={{ color: "white" }}
+        >
+          Love Actually
+        </h1>
+        <div className="uk-container uk-align-center ">
+          <div className="uk-container uk-box-shadow-large uk-box-shadow-right-large uk-box-shadow-left-large uk-margin-large uk-grid uk-child-width-expand@s ">
             <ActorList />
+            <SceneList />
           </div>
         </div>
       </ApolloProvider>

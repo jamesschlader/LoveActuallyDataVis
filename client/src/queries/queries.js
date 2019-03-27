@@ -70,6 +70,7 @@ const getSceneQuery = gql`
       scene
       actorIds
       actors {
+        id
         name
         role
       }

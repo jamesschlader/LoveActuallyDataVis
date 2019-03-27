@@ -1,16 +1,47 @@
 import React, { Component } from "react";
 import { graphql, compose } from "react-apollo";
-import { getSceneQuery, getActorsQuery } from "../queries/queries";
+import {
+  getSceneQuery,
+  getActorsQuery,
+  updateSceneMutation
+} from "../queries/queries";
 
 class SceneDetails extends Component {
   showDetails = () => {
     const { scene } = this.props.data;
 
     if (scene) {
-      return <h4>{scene.scene}</h4>;
+      return (
+        <div className="inline-block">
+          <h4 className="inline-block">{scene.scene}</h4>
+          <p
+            key={scene.id}
+            onClick={e => this.handleEdit(e, scene.id)}
+            className="linkable"
+            uk-icon="pencil"
+          />
+          <h5 className="inline-block">Actors in scene</h5>
+          <p
+            onClick={e => this.handleEdit(e, scene.id)}
+            className="linkable"
+            uk-icon="pencil"
+          />
+          {scene.actors.length > 0 ? (
+            scene.actors.map(actor => <p key={actor.id}>{actor.name}</p>)
+          ) : (
+            <p>No actors in the scene</p>
+          )}
+        </div>
+      );
     } else {
       return <p>No scene details available.</p>;
     }
+  };
+
+  handleEdit = (e, id) => {
+    e.preventDefault();
+    console.log(id);
+    console.log(this.props);
   };
   render() {
     return (
@@ -36,5 +67,6 @@ export default compose(
     },
     { name: "getSceneQuery" }
   ),
-  graphql(getActorsQuery, { name: "getActorsQuery" })
+  graphql(getActorsQuery, { name: "getActorsQuery" }),
+  graphql(updateSceneMutation, { name: "updateSceneMutation" })
 )(SceneDetails);

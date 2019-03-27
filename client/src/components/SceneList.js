@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { graphql, compose } from "react-apollo";
 import { getScenesQuery } from "../queries/queries";
 import SceneDetails from "./SceneDetails";
-import AddScene from "./AddScene";
 
 class SceneList extends Component {
   state = {
@@ -29,11 +28,10 @@ class SceneList extends Component {
 
   render() {
     return (
-      <div className="uk-card uk-card-default uk-padding t ">
+      <div className="uk-card uk-card-default uk-padding  ">
         <h3 className="uk-card-title">Scenes</h3>
         <ul className="uk-list uk-link-text">{this.displayScenes()}</ul>
         <SceneDetails selectedScene={this.state.selectedSceneId} />
-        <AddScene />
       </div>
     );
   }
